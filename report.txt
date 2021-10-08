@@ -1,0 +1,107 @@
+Leon Zhang
+
+Obstacles: 
+
+- My game kept running even though the turns are less than 0, going into negative turns. 
+- It turns out my BeatThat::determineGameOutcome( ) was not functioning properly
+- I was accidently declaring new "result" variables in every "if" statement. Fixed.
+
+Test Cases:
+
+           Die d1; d1.setValue( 1 );
+           Die d2; d2.setValue( 2 );
+           Die d3; d3.setValue( 3 );
+           Die d4; d4.setValue( 4 );
+           Die d5; d5.setValue( 5 );
+           Die d6; d6.setValue( 6 );
+
+Human Won Test:
+
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           assert( game.isGameOver() == true );
+           assert( game.getHuman( ).getRoundsWon( ) == 5 );
+           assert( game.getComputer( ).getRoundsWon( ) == 0 );
+           assert( game.determineGameOutcome( ) == cs31::BeatThat::HUMANWONGAME );
+
+
+Computer Won Test:
+
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           assert( game.isGameOver() == true );
+           assert( game.getHuman( ).getRoundsWon( ) == 0 );
+           assert( game.getComputer( ).getRoundsWon( ) == 5 );
+           assert( game.determineGameOutcome( ) == cs31::BeatThat::COMPUTERWONGAME );
+
+
+Tied Game Test:
+
+
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           assert( game.isGameOver() == true );
+           assert( game.getHuman( ).getRoundsWon( ) == 0 );
+           assert( game.getComputer( ).getRoundsWon( ) == 0 );
+           assert( game.determineGameOutcome( ) == cs31::BeatThat::TIEDGAME );
+
+Game Not Over Test:
+
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           assert( game.isGameOver() == false);
+
+Rounds Won Counter Test:
+
+           game.humanPlay( d1, d1 );
+           game.computerPlay( d6, d6 );
+           game.endTurn( );
+           game.humanPlay( d6, d6 );
+           game.computerPlay( d1, d1 );
+           game.endTurn( );
+           assert( game.getHuman( ).getRoundsWon( ) == 1 );
+           assert( game.getComputer( ).getRoundsWon( ) == 1 );
+
